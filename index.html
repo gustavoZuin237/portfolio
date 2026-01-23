@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Aurora a Freefolio template by OSSPH</title>
+    <meta
+      name="description"
+      content="A modern dark portfolio template inspired by the Northern Lights with comprehensive sections and smooth animations"
+    />
+    <meta property="og:title" content="Aurora Portfolio Template" />
+    <meta
+      property="og:description"
+      content="A Northern Lights inspired portfolio template with dark mode aesthetic"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "aurora-green": "#00ffaa",
+              "aurora-blue": "#00aaff",
+              "aurora-purple": "#aa00ff",
+              "html-orange": "#ec9642",
+              "typescript-blue": "#4282ec",
+              "aurora-pink": "#ff00aa",
+              "dark-bg": "#0a0e1a",
+              "dark-card": "#1a1f2e",
+              "dark-border": "#2a2f3e",
+            },
+            animation: {
+              aurora: "aurora 15s ease-in-out infinite",
+              float: "float 6s ease-in-out infinite",
+              "pulse-slow": "pulse 4s ease-in-out infinite",
+              "slide-up": "slideUp 0.5s ease-out",
+              glow: "glow 2s ease-in-out infinite",
+            },
+            keyframes: {
+              aurora: {
+                "0%, 100%": {
+                  backgroundPosition: "0% 50%",
+                  backgroundSize: "200% 200%",
+                },
+                "50%": {
+                  backgroundPosition: "100% 50%",
+                  backgroundSize: "200% 200%",
+                },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              glow: {
+                "0%, 100%": {
+                  boxShadow:
+                    "0 0 5px rgba(0, 255, 170, 0.5), 0 0 20px rgba(0, 255, 170, 0.3)",
+                },
+                "50%": {
+                  boxShadow:
+                    "0 0 20px rgba(0, 170, 255, 0.8), 0 0 40px rgba(0, 170, 255, 0.4)",
+                },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Aurora gradient background */
+      .aurora-bg {
+        background: linear-gradient(-45deg, #0a0e1a, #1a0033, #002244, #001a33);
+        background-size: 400% 400%;
+        animation: aurora 15s ease infinite;
+      }
+
+      /* Aurora light effect overlay */
+      .aurora-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        background:
+          radial-gradient(
+            ellipse at top left,
+            rgba(0, 255, 170, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            ellipse at top right,
+            rgba(0, 170, 255, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            ellipse at bottom left,
+            rgba(170, 0, 255, 0.1) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            ellipse at bottom right,
+            rgba(255, 0, 170, 0.1) 0%,
+            transparent 40%
+          );
+        pointer-events: none;
+        opacity: 0.7;
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #0a0e1a;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #00ffaa, #00aaff);
+        border-radius: 5px;
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          #00ffaa 0%,
+          #00aaff 50%,
+          #aa00ff 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Card hover effect */
+      .card-hover {
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+
+      .card-hover:hover {
+        border-color: #00ffaa;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 255, 170, 0.2);
+      }
+
+      /* Progress bar animation */
+      @keyframes progressAnimation {
+        0% {
+          width: 0%;
+        }
+      }
+
+      .progress-bar {
+        animation: progressAnimation 2s ease-out forwards;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark-bg text-gray-200 aurora-bg">
+    <!-- Aurora overlay effect -->
+    <div class="aurora-overlay"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full bg-dark-bg/90 backdrop-blur-md border-b border-dark-border z-50"
+    >
+      <div class="container mx-auto px-6 py-3">
+        <div class="flex justify-between items-center">
+          <div class="text-2xl font-bold gradient-text">Gustavo Zuin</div>
+          <ul class="hidden md:flex space-x-8">
+            <li>
+              <a href="#home" class="hover:text-aurora-green transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#about" class="hover:text-aurora-green transition"
+                >Sobre Mim</a
+              >
+            </li>
+            <li>
+              <a href="#skills" class="hover:text-aurora-green transition"
+                >Habilidades</a
+              >
+            </li>
+            <li>
+              <a href="#portfolio" class="hover:text-aurora-green transition"
+                >Projetos</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="hover:text-aurora-green transition"
+                >Contato</a
+              >
+            </li>
+          </ul>
+          <!-- Mobile menu button -->
+          <button class="md:hidden" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+          <a href="#home" class="block py-2 hover:text-aurora-green">Home</a>
+          <a href="#about" class="block py-2 hover:text-aurora-green"
+            >Sobre Mim</a
+          >
+          <a href="#skills" class="block py-2 hover:text-aurora-green"
+            >Habilidades</a
+          >
+          <a href="#portfolio" class="block py-2 hover:text-aurora-green"
+            >Projetos</a
+          >
+          <a href="#contact" class="block py-2 hover:text-aurora-green"
+            >Contato</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section
+      id="home"
+      class="min-h-screen flex items-center justify-center pt-20 relative"
+    >
+      <div class="container mx-auto px-6 text-center z-10">
+        <div class="animate-slide-up">
+          <h1 class="text-5xl md:text-7xl font-bold mb-4">
+            Olá, eu sou <span class="gradient-text">Gustavo Zuin</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-400 mb-8">
+            Frontend Developer | Web Developer | Mobile Developer
+          </p>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-12">
+            Criando experiências digitais impressionantes e modernas. <br />
+            Apaixonado por tecnologia e design atraente, funcional e limpo.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#portfolio"
+              target="_blank"
+              class="px-8 py-3 bg-gradient-to-r from-aurora-green to-aurora-blue rounded-full text-dark-bg font-semibold hover:shadow-lg hover:shadow-aurora-green/50 transition transform hover:scale-105"
+            >
+              Conheça meu trabalho
+            </a>
+            <a
+              href="assets/resume.pdf"
+              class="px-8 py-3 border-2 border-aurora-green rounded-full hover:bg-aurora-green hover:text-dark-bg transition transform hover:scale-105"
+            >
+              Baixe meu currículo
+            </a>
+          </div>
+          <div class="mt-12 flex justify-center space-x-6">
+            <a
+              href="https://github.com/gustavoZuin237"
+              class="text-2xl hover:text-aurora-green transition"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/gustavo-zuin/"
+              class="text-2xl hover:text-aurora-blue transition"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated particles -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          class="absolute w-2 h-2 bg-aurora-green rounded-full animate-float"
+          style="top: 20%; left: 10%"
+        ></div>
+        <div
+          class="absolute w-2 h-2 bg-aurora-blue rounded-full animate-float"
+          style="top: 60%; left: 80%; animation-delay: 1s"
+        ></div>
+        <div
+          class="absolute w-2 h-2 bg-aurora-purple rounded-full animate-float"
+          style="top: 40%; left: 60%; animation-delay: 2s"
+        ></div>
+        <div
+          class="absolute w-2 h-2 bg-aurora-pink rounded-full animate-float"
+          style="top: 80%; left: 30%; animation-delay: 3s"
+        ></div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">
+          Sobre Mim
+        </h2>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <p class="text-gray-400 leading-relaxed">
+              Sou um desenvolvedor web com foco em frontend, dedicado à criação
+              de interfaces modernas, funcionais e bem estruturadas. Tenho como
+              objetivo desenvolver soluções que aliem boa experiência do
+              usuário, clareza visual e qualidade técnica. <br />
+              <br />
+
+              Atuo principalmente com HTML, CSS, JavaScript e o framework React,
+              prezando por código limpo, organizado e de fácil manutenção. Tenho
+              atenção aos detalhes, preocupação com usabilidade e performance, e
+              encaro cada projeto como uma oportunidade de evoluir tecnicamente
+              e entregar valor real. <br />
+              <br />
+
+              Estou aberto a novos desafios e colaborações que contribuam para
+              meu crescimento profissional e para o sucesso dos projetos em que
+              atuo.
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div
+                class="bg-dark-card p-4 rounded-lg border border-dark-border"
+              >
+                <div class="text-3xl font-bold text-aurora-green">30+</div>
+                <div class="text-sm text-gray-400">Projetos completos</div>
+              </div>
+              <div
+                class="bg-dark-card p-4 rounded-lg border border-dark-border"
+              >
+                <div class="text-3xl font-bold text-aurora-blue">3+</div>
+                <div class="text-sm text-gray-400">Anos de experiência</div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              class="w-80 h-80 mx-auto rounded-full bg-gradient-to-br from-aurora-green via-aurora-blue to-aurora-purple p-1"
+            >
+              <div
+                class="w-full h-full rounded-full bg-dark-bg flex items-center justify-center"
+              >
+                <span class="text-6xl">💻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-dark-card/30">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">
+          Habilidades principais
+        </h2>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+          <div class="bg-dark-card p-6 rounded-lg card-hover text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-aurora-green to-aurora-blue flex items-center justify-center"
+            >
+              <i class="fas fa-laptop-code text-2xl text-dark-bg"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Desenvolvimento Web</h3>
+            <p class="text-gray-400">
+              Aplicações web personalizadas construídas com frameworks modernos
+              e melhores práticas para desempenho ideal.
+            </p>
+          </div>
+
+          <div class="bg-dark-card p-6 rounded-lg card-hover text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-aurora-blue to-aurora-purple flex items-center justify-center"
+            >
+              <i class="fas fa-mobile-alt text-2xl text-dark-bg"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Desenvolvimento Mobile</h3>
+            <p class="text-gray-400">
+              Aplicações móveis multiplataforma que oferecem experiências de
+              usuário agradáveis.
+            </p>
+          </div>
+
+          <div class="bg-dark-card p-6 rounded-lg card-hover text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-aurora-blue to-aurora-pink flex items-center justify-center"
+            >
+              <i class="fas fa-cogs text-2xl text-dark-bg"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Integração de API</h3>
+            <p class="text-gray-400">
+              Integrações com APIs de terceiros e desenvolvimento de APIs
+              personalizadas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">
+          Projetos em destaque
+        </h2>
+        
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+          <div class="bg-dark-card rounded-lg overflow-hidden card-hover group">
+            <div
+              class="h-48 bg-gradient-to-br from-aurora-green to-aurora-blue flex items-center justify-center"
+            >
+              <i class="fa fa-cutlery text-6xl text-dark-bg"></i>
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Daily Diet</h3>
+              <p class="text-gray-400 mb-4">Aplicativo de controle de dieta desenvolvido com React Native e Typescript, além do framework Expo para React Native</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-aurora-blue/20 text-aurora-blue rounded text-xs"
+                  >React Native</span
+                >
+                <span
+                  class="px-2 py-1 bg-typescript-blue/20 text-typescript-blue rounded text-xs"
+                  >Typescript</span
+                >
+                <span
+                  class="px-2 py-1 bg-aurora-green/20 text-aurora-green rounded text-xs"
+                  >Expo</span
+                >
+              </div>
+
+              <!-- Preview modal -->
+              <dialog
+                id="previewModal"
+                class="bg-dark-card/90 text-gray-200 rounded-2xl p-6 w-full max-w-4xl border border-dark-border backdrop:backdrop-blur-md animate-slide-up"
+              >
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="text-2xl font-semibold gradient-text">
+                    Daily Diet
+                  </h3>
+
+                  <button
+                    onclick="previewModal.close()"
+                    class="flex items-center gap-2 px-4 py-2 text-sm border border-dark-border rounded-full hover:border-aurora-green hover:text-aurora-green transition"
+                  >
+                    <i class="fas fa-xmark"></i>
+                    Fechar preview
+                  </button>
+                </div>
+
+                <!-- Images grid -->
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div
+                    class="bg-dark-bg rounded-lg overflow-hidden border border-dark-border hover:border-aurora-green transition"
+                  >
+                    <img
+                      src="assets\daily diet preview\1.jpg"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div
+                    class="bg-dark-bg rounded-lg overflow-hidden border border-dark-border hover:border-aurora-blue transition"
+                  >
+                    <img
+                      src="assets\daily diet preview\2.jpg"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div
+                    class="bg-dark-bg rounded-lg overflow-hidden border border-dark-border hover:border-aurora-purple transition"
+                  >
+                    <img
+                      src="assets\daily diet preview\3.jpg"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </dialog>
+
+              <div class="flex space-x-4">
+                <button
+                  onclick="previewModal.showModal()"
+                  class="text-aurora-green hover:text-aurora-blue transition"
+                >
+                  <i class="fas fa-external-link-alt"></i> Preview
+                </button>
+                <a
+                  href="https://github.com/gustavoZuin237/daily-diet"
+                  class="text-aurora-green hover:text-aurora-blue transition"
+                >
+                  <i class="fab fa-github"></i> Código
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-card rounded-lg overflow-hidden card-hover group">
+            <div
+              class="h-48 bg-gradient-to-br from-aurora-blue to-aurora-purple flex items-center justify-center"
+            >
+              <i class="fa fa-book text-6xl text-dark-bg"></i>
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Kingdom of Dialect</h3>
+              <p class="text-gray-400 mb-4">Jogo de aprendizado de língua inglesa desenvolvido e aprovado como TCC de curso técnico</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-aurora-blue/20 text-aurora-blue rounded text-xs"
+                  >React</span
+                >
+                <span
+                  class="px-2 py-1 bg-typescript-blue/20 text-typescript-blue rounded text-xs"
+                  >Typescript</span
+                >
+              </div>
+
+              <div class="flex space-x-4">
+                <a
+                    href="https://gustavozuin237.github.io/kingdom-of-dialect/"
+                    class="text-aurora-green hover:text-aurora-blue transition"
+                >
+                  <i class="fas fa-external-link-alt"></i> Jogue agora
+                </a>
+                <a
+                  href="https://github.com/gustavoZuin237/kingdom-of-dialect"
+                  class="text-aurora-green hover:text-aurora-blue transition"
+                >
+                  <i class="fab fa-github"></i> Código
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-card/30">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">
+          Entre em Contato
+        </h2>
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="space-y-6">
+              <div class="flex items-center space-x-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-aurora-green to-aurora-blue flex items-center justify-center"
+                >
+                  <i class="fas fa-envelope text-dark-bg"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400">E-mail</p>
+                  <p>zuingustavo206@gmail.com</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-aurora-blue to-aurora-purple flex items-center justify-center"
+                >
+                  <i class="fas fa-phone text-dark-bg"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400">
+                    Número de telefone e WhatsApp
+                    <i class="fab fa-whatsapp"></i>
+                  </p>
+                  <p>+55 (12) 99121-8943</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-aurora-purple to-aurora-pink flex items-center justify-center"
+                >
+                  <i class="fas fa-map-marker-alt text-dark-bg"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400">Localização</p>
+                  <p>Taubaté, SP</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-dark-border">
+      <div class="container mx-auto px-6 text-center">
+        <div class="mb-4 space-x-4">
+          <a
+            href="https://github.com/gustavoZuin237"
+            class="text-2xl hover:text-aurora-green transition"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/gustavo-zuin/"
+            class="text-2xl hover:text-aurora-blue transition"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+        <p class="text-gray-400">
+          © 2024 Gustavo Zuin. Built with
+          <a
+            href="https://github.com/OSSPhilippines/freefolio"
+            class="text-aurora-green hover:text-aurora-blue transition"
+          >
+            Freefolio
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("hidden");
+      }
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll("#mobileMenu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("mobileMenu").classList.add("hidden");
+        });
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-slide-up");
+          }
+        });
+      }, observerOptions);
+
+      // Observe sections for animation
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
